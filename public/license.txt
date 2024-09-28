@@ -1,0 +1,11 @@
+Model Information:
+* title:	Kepler-186f
+* source:	https://sketchfab.com/3d-models/kepler-186f-c484b8b4aa9248b6998b6222d62f5a77
+* author:	uperesito (https://sketchfab.com/uperesito)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Kepler-186f" (https://sketchfab.com/3d-models/kepler-186f-c484b8b4aa9248b6998b6222d62f5a77) by uperesito (https://sketchfab.com/uperesito) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

@@ -1,33 +1,59 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
+import { useFrame, useLoader } from "@react-three/fiber";
 import { useGLTF } from "@react-three/drei";
 import * as THREE from "three";
 
 export function PlanetModel(props) {
-  const meshRef = useRef();
-  const { nodes, materials } = useGLTF("/55_Cancri_e_1_24364.glb");
+  const group = useRef();
+  const clouds = useRef();
+  const { nodes } = useGLTF("/scene.gltf");
 
-  useEffect(() => {
-    const mesh = meshRef.current;
-    if (mesh) {
-      // Compute bounding box
-      const box = new THREE.Box3().setFromObject(mesh);
-      const center = box.getCenter(new THREE.Vector3());
-      mesh.position.sub(center); // Center the model
+  // Load textures
+  const [cloudTexture, planetTexture, specularTexture] = useLoader(
+    THREE.TextureLoader,
+    [
+      "/textures/clouds_diffuse.png",
+      "/textures/planet_diffuse.png",
+      "/textures/planet_specularGlossiness.png",
+    ]
+  );
+
+  // Rotate the planet
+  useFrame((state, delta) => {
+    if (group.current) {
+      group.current.rotation.y += delta * 0.07;
     }
-  }, []);
+    if (clouds.current) {
+      clouds.current.rotation.y -= delta * 0.02;
+    }
+  });
 
   return (
-    <group {...props} dispose={null}>
+    <group ref={group} {...props} dispose={null}>
       <mesh
-        ref={meshRef}
-        scale={[0.01, 0.01, 0.01]}
-        castShadow
-        receiveShadow
-        geometry={nodes.Cube008.geometry}
-        material={materials["Default OBJ.005"]}
-      />
+        geometry={nodes.Object_4.geometry}
+        rotation={[Math.PI, -1.107, Math.PI]}
+        scale={1.032}
+        ref={clouds}
+      >
+        <meshStandardMaterial map={cloudTexture} transparent opacity={0.5} />
+      </mesh>
+      <mesh
+        geometry={nodes.Object_6.geometry}
+        rotation={[Math.PI, -1.107, Math.PI]}
+        scale={0.97}
+      >
+        <meshStandardMaterial map={specularTexture} />
+      </mesh>
+      <mesh
+        geometry={nodes.Object_8.geometry}
+        rotation={[-Math.PI, -0.708, -Math.PI]}
+        scale={0.981}
+      >
+        <meshStandardMaterial map={planetTexture} />
+      </mesh>
     </group>
   );
 }
 
-useGLTF.preload("/55_Cancri_e_1_24364.glb");
+useGLTF.preload("/scene.gltf");

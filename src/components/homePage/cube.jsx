@@ -1,8 +1,8 @@
 function Cube() {
   return (
-    <mesh>
+    <mesh position={[0, 1, 0]}>
       <boxGeometry />
-      <meshBasicMaterial color="red" />
+      <meshStandardMaterial color="red" />
     </mesh>
   );
 }

@@ -1,43 +1,106 @@
 import { useFrame, useThree } from "@react-three/fiber";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import * as THREE from "three";
 import { PlanetModel } from "./planetModel";
+import { Html, PerspectiveCamera } from "@react-three/drei";
+
 function Planet() {
+  const [isHovered, setIsHovered] = useState(false);
   const meshRef = useRef();
   const groupRef = useRef();
-  const { camera } = useThree();
+  const lightRef = useRef();
+  const lightHelperRef = useRef();
+  const { scene } = useThree();
+  const camera = useRef();
 
   useEffect(() => {
-    if (groupRef.current) {
-      groupRef.current.add(camera);
-      camera.position.set(3, 1, 0); // Adjust these values to change camera position relative to the planet
-      camera.lookAt(0, 0, 0); // Make the camera look at the center of the orbit
-    }
-  }, [camera]);
-  useFrame((state, delta) => {
-    // Rotate the planet
-    if (meshRef.current) {
-      meshRef.current.rotation.y += 0.009;
+    if (lightRef.current) {
+      lightHelperRef.current = new THREE.PointLightHelper(
+        lightRef.current,
+        0.5,
+        0xffcda5
+      );
+      scene.add(lightHelperRef.current);
     }
 
-    // Rotate the group (orbit around the center)
+    return () => {
+      if (lightHelperRef.current) {
+        scene.remove(lightHelperRef.current);
+      }
+    };
+  }, [scene]);
+
+  useEffect(() => {
+    console.log(isHovered);
+  }, [isHovered]);
+
+  useFrame(() => {
     if (groupRef.current) {
-      groupRef.current.rotation.y += 0.01;
+      groupRef.current.rotation.y += 0.001;
     }
 
-    // Update camera position
+    if (lightHelperRef.current) {
+      lightHelperRef.current.update();
+    }
+
     if (meshRef.current) {
       const planetPosition = new THREE.Vector3();
       meshRef.current.getWorldPosition(planetPosition);
-
-      // Make the camera look at the planet
-      camera.lookAt(planetPosition);
+      camera.current.lookAt(planetPosition);
     }
   });
+
   return (
-    <group position={[-5, 0, 0]} rotation={[0, 0, 0]} ref={groupRef}>
-      <PlanetModel ref={meshRef} />
-    </group>
+    <>
+      <pointLight
+        ref={lightRef}
+        intensity={15}
+        color={0xf5ded0}
+        position={[1, 0, 0]}
+      />
+
+      <group position={[1, 0, 0]} rotation={[0, 0, 0]} ref={groupRef}>
+        <Html
+          position={[-4, 0, 0]}
+          style={{
+            color: "white",
+            fontSize: "16px",
+            fontFamily: "Arial, sans-serif",
+            textAlign: "left",
+          }}
+        >
+          <h1
+            style={{
+              fontSize: "24px",
+              fontWeight: "bold",
+              marginBottom: "5px",
+            }}
+          >
+            Planet Info
+          </h1>
+          <p>This is content from the Planet component</p>
+        </Html>
+        <group position={[-4, 0, 0]}>
+          <PerspectiveCamera
+            ref={camera}
+            makeDefault
+            far={20000}
+            near={0.001}
+            position={[2, 1, 2]}
+          />
+        </group>
+
+        <group
+          ref={meshRef}
+          position={[-4, 0, 0]}
+          onPointerOver={() => setIsHovered(true)}
+          onPointerOut={() => setIsHovered(false)}
+        >
+          <PlanetModel />
+        </group>
+      </group>
+    </>
   );
 }
+
 export default Planet;
