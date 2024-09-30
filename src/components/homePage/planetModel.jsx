@@ -1,12 +1,14 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useFrame, useLoader } from "@react-three/fiber";
-import { useGLTF } from "@react-three/drei";
+import { useGLTF, useScroll } from "@react-three/drei";
 import * as THREE from "three";
 
 export function PlanetModel(props) {
   const group = useRef();
   const clouds = useRef();
   const { nodes } = useGLTF("/scene.gltf");
+  const scrollProggress = useScroll();
+  const [lastScrollOffset, setLastScrollOffset] = useState(0);
 
   // Load textures
   const [cloudTexture, planetTexture, specularTexture] = useLoader(
@@ -25,6 +27,10 @@ export function PlanetModel(props) {
     }
     if (clouds.current) {
       clouds.current.rotation.y -= delta * 0.02;
+    }
+    if (scrollProggress) {
+      group.current.rotation.y += scrollProggress.offset - lastScrollOffset;
+      setLastScrollOffset(scrollProggress.offset);
     }
   });
 
