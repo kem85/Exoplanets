@@ -3,6 +3,9 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      backgroundImage: {
+        bgImg: "url('/magicpattern-mesh-gradient-1728031136227.jpeg')",
+      },
       colors: {
         "primary-orange": "#CD5C08", // Strong orange
         "background-cream": "#FFF5E4", // Soft cream

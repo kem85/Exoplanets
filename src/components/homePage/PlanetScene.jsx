@@ -1,5 +1,5 @@
-import { useFrame, useThree } from "@react-three/fiber";
-import { useRef, useEffect, useState, useMemo } from "react";
+import { useFrame, useLoader, useThree } from "@react-three/fiber";
+import { useRef, useEffect, useState, useMemo, Suspense } from "react";
 import * as THREE from "three";
 import { PlanetModel } from "./planetModel";
 import {
@@ -7,11 +7,14 @@ import {
   ScrollControls,
   Scroll,
   useScroll,
+  Html,
 } from "@react-three/drei";
 import HomePageContent from "./homePageContent";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 function PlanetScene() {
   const [isHovered, setIsHovered] = useState(false);
+  const [loading, setLoading] = useState(true); // Custom loading state
   const meshRef = useRef();
   const groupRef = useRef();
   const lightRef = useRef();
@@ -117,7 +120,12 @@ function PlanetScene() {
       tooltipRef.current.visible = isHovered;
     }
   });
-
+  // Load the planet model
+  useLoader(GLTFLoader, "/scene.gltf", (gltf) => {
+    // Set the loaded model to a reference
+    meshRef.current = gltf.scene;
+    setLoading(false); // Set loading to false when the model is loaded
+  });
   return (
     <ScrollControls pages={3} damping={0.25}>
       <Scroll>
@@ -138,21 +146,23 @@ function PlanetScene() {
               position={[2, 1, 2]}
             />
           </group>
-
-          <group
-            ref={meshRef}
-            position={[-4, 0, 0]}
-            onPointerOver={() => {
-              setIsHovered(true);
-              console.log("Planet hovered");
-            }}
-            onPointerOut={() => {
-              setIsHovered(false);
-              console.log("Planet unhovered");
-            }}
-          >
-            <PlanetModel />
-          </group>
+          {loading ? (
+            <Html center>
+              <div className="flex flex-col items-center justify-center">
+                <div className="animate-spin border-4 border-white border-t-4 border-opacity-30 rounded-full w-10 h-10 mb-2"></div>
+                <p className="text-white text-sm">Loading Planet...</p>
+              </div>
+            </Html>
+          ) : (
+            <group
+              ref={meshRef}
+              position={[-4, 0, 0]}
+              onPointerOver={() => setIsHovered(true)}
+              onPointerOut={() => setIsHovered(false)}
+            >
+              <PlanetModel />
+            </group>
+          )}
         </group>
       </Scroll>
 
