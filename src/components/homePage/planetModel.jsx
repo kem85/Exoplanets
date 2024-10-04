@@ -1,9 +1,9 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { useFrame, useLoader } from "@react-three/fiber";
 import { useGLTF, useScroll } from "@react-three/drei";
 import * as THREE from "three";
 
-export function PlanetModel(props) {
+export function PlanetModel({ loading, ...props }) {
   const group = useRef();
   const clouds = useRef();
   const { nodes } = useGLTF("/scene.gltf");
@@ -33,6 +33,9 @@ export function PlanetModel(props) {
       setLastScrollOffset(scrollProggress.offset);
     }
   });
+
+  // If loading is true, do not render the planet model
+  if (loading) return null;
 
   return (
     <group ref={group} {...props} dispose={null}>
