@@ -1,41 +1,43 @@
-import React, { useRef } from "react";
-import { useFrame, useLoader } from "@react-three/fiber";
-import { useGLTF, useScroll } from "@react-three/drei";
-import * as THREE from "three";
+import React, { useCallback, useRef, useState } from "react";
+import { useFrame } from "@react-three/fiber";
+import { useGLTF, useScroll, useTexture } from "@react-three/drei";
 
-export function PlanetModel({ loading, ...props }) {
+export function PlanetModel({ ...props }) {
   const group = useRef();
   const clouds = useRef();
   const { nodes } = useGLTF("/scene.gltf");
-  const scrollProggress = useScroll();
+  const scrollProgress = useScroll();
   const [lastScrollOffset, setLastScrollOffset] = useState(0);
 
   // Load textures
-  const [cloudTexture, planetTexture, specularTexture] = useLoader(
-    THREE.TextureLoader,
-    [
-      "/textures/clouds_diffuse.png",
-      "/textures/planet_diffuse.png",
-      "/textures/planet_specularGlossiness.png",
-    ]
+  const [cloudTexture, planetTexture, specularTexture] = useTexture([
+    "/textures/clouds_diffuse.png",
+    "/textures/planet_diffuse.png",
+    "/textures/planet_specularGlossiness.png",
+  ]);
+
+  // Memoize the rotation calculation
+  const calculateRotation = useCallback(
+    (delta) => {
+      if (group.current) {
+        group.current.rotation.y += delta * 0.07;
+      }
+      if (clouds.current) {
+        clouds.current.rotation.y -= delta * 0.02;
+      }
+      if (scrollProgress) {
+        const scrollOffset = scrollProgress.offset;
+        group.current.rotation.y += scrollOffset - lastScrollOffset;
+        setLastScrollOffset(scrollOffset);
+      }
+    },
+    [scrollProgress, lastScrollOffset]
   );
 
   // Rotate the planet
   useFrame((state, delta) => {
-    if (group.current) {
-      group.current.rotation.y += delta * 0.07;
-    }
-    if (clouds.current) {
-      clouds.current.rotation.y -= delta * 0.02;
-    }
-    if (scrollProggress) {
-      group.current.rotation.y += scrollProggress.offset - lastScrollOffset;
-      setLastScrollOffset(scrollProggress.offset);
-    }
+    calculateRotation(delta);
   });
-
-  // If loading is true, do not render the planet model
-  if (loading) return null;
 
   return (
     <group ref={group} {...props} dispose={null}>
@@ -64,5 +66,3 @@ export function PlanetModel({ loading, ...props }) {
     </group>
   );
 }
-
-useGLTF.preload("/scene.gltf");
