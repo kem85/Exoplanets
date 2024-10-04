@@ -5,6 +5,7 @@ import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ErrorPage from "./error.jsx";
 import BrowseContent from "./components/PlanetsBrowse/browseContent.jsx";
+import Method1 from "./components/method1/Method1.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -14,6 +15,10 @@ const router = createBrowserRouter([
   {
     path: "/ExoPlanets",
     element: <BrowseContent />,
+  },
+  {
+    path: "/method1",
+    element: <Method1/>,
   },
 ]);
 
