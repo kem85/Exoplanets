@@ -4,6 +4,7 @@ import { useBtnBubbleEffect } from "../../../hooks.js";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { history } from "../../main.jsx";
+import { string } from "three/webgpu";
 //git commit -S -m "scroll animations in homepage and added the content of the homepage"
 function HomePageContent() {
   const [visible1, setVisible1] = useState(false);
