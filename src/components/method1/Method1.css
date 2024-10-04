@@ -1,0 +1,64 @@
+.exoplanetSection {
+    background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+    color: white;
+    padding: 40px;
+    max-width: 800px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  .exoplanetSection h1, .exoplanetSection h2, .exoplanetSection h3 {
+    color: #ffdd99;
+  }
+  
+  .exoplanetSection p {
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  .exoplanetSection::-webkit-scrollbar {
+    width: 12px;
+  }
+  exoplanet-section::-webkit-scrollbar-track {
+    background: rgba(255, 221, 153, 0.1); /* Light background track */
+    border-radius: 10px;
+  }
+  
+  .exoplanetSection::-webkit-scrollbar-thumb {
+    background: #ffcc66; /* Thumb color */
+    border-radius: 10px;
+    border: 2px solid transparent; /* Adds space between thumb and edge */
+    background-clip: padding-box; /* Ensures thumb stays within track */
+  }
+  
+  .exoplanetSection::-webkit-scrollbar-thumb:hover {
+    background: #ffdd99; /* Lighter color on hover */
+  }
+  
+  /* Scrollbar for Firefox */
+  .exoplanetSection {
+    scrollbar-width: thin;
+    scrollbar-color: #ffcc66 rgba(255, 221, 153, 0.1);
+  }
+  
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    color: #000;
+  }
+  
+  button {
+    padding: 10px 20px;
+    background-color: #4e1e89;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    color: #4e1e89;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #ffcc66;
+  }
+
