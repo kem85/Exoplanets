@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { useBtnBubbleEffect } from "../../../hooks.js";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { history } from "../../main.jsx";
 //git commit -S -m "scroll animations in homepage and added the content of the homepage"
 function HomePageContent() {
   const [visible1, setVisible1] = useState(false);
@@ -136,6 +137,9 @@ function HomePageContent() {
         </p>
       </div>
       <motion.button
+        onClick={() => {
+          history.push("Method1");
+        }}
         className="absolute h-[8rem] rounded-full w-[8rem] font-bold cursor-pointer outline-none bg-primary-orange text-background-cream top-[280vh] left-[85vw] text-[1.5rem] z-10 transition-opacity duration-500 flex items-center justify-center"
         ref={NextBtn}
         style={{

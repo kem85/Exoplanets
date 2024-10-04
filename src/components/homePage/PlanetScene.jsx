@@ -2,9 +2,15 @@ import { useFrame, useThree } from "@react-three/fiber";
 import { useRef, useEffect, useState, Suspense } from "react";
 import * as THREE from "three";
 import { PlanetModel } from "./planetModel";
-import { PerspectiveCamera, ScrollControls, Scroll } from "@react-three/drei";
+import {
+  PerspectiveCamera,
+  ScrollControls,
+  Scroll,
+  Html,
+} from "@react-three/drei";
 import HomePageContent from "./homePageContent";
 import Loader from "./loader";
+import { Link } from "react-router-dom";
 
 function PlanetScene() {
   const [isHovered, setIsHovered] = useState(false);

@@ -5,20 +5,14 @@ import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ErrorPage from "./error.jsx";
 import BrowseContent from "./components/PlanetsBrowse/browseContent.jsx";
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/ExoPlanets",
-    element: <BrowseContent />,
-  },
-]);
+import Method1 from "./components/method1/Method1.jsx";
+import ThreeRouter from "./ThreeRouter.jsx";
+import { createBrowserHistory } from "history";
+
+export const history = createBrowserHistory();
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <ThreeRouter history={history} />
   </StrictMode>
 );
