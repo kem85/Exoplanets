@@ -2,10 +2,14 @@ import { Link } from "react-router-dom";
 import { PlanetCard } from "./components/planetCard";
 import { planets } from "./planets";
 import { history } from "../../main";
+import "./components/browseContent.css";
+//import "./browseContent.css";
 
 function BrowseContent() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen w-full bg-primary-orange text-white">
+    <div className="backgroundcontainer flex flex-col items-center justify-center min-h-screen w-full text-white" >  
+    {/* // className="flex flex-col items-center justify-center min-h-screen w-full bg-primary-orange text-white">  */}
+    {/* // className="background-container" > */}
       <button
         onClick={() => {
           history.push("/");

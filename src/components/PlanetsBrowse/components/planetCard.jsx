@@ -15,7 +15,7 @@ export const PlanetCard = ({ planet }) => {
       </div>
       <div className="text-center">
         <h2 className="text-xl font-bold mb-2">{planet.name}</h2>
-        <p className="text-sm text-gray-700 mb-2">{planet.description}</p>
+        <p className="text-sm opacity-5000 text-green-300 mb-2">{planet.description}</p>
         <p className="text-sm">
           <strong>Distance from Earth:</strong> {planet.distance}
         </p>

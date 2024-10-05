@@ -1,0 +1,34 @@
+/* FirstPage.css */
+.first-page-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #000000, #000428);
+    color: white;
+    text-align: center;
+  }
+  
+  .welcome-text {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  .journey-button {
+    padding: 15px 30px;
+    font-size: 1.5rem;
+    background-color: orange;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+    transition: background-color 0.3s ease;
+  }
+  
+  .journey-button:hover {
+    background-color: darkorange;
+  }
+  

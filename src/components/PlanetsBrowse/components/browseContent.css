@@ -1,0 +1,58 @@
+/* App.css */
+
+.backgroundcontainer {
+    background-image: url('/Image/star1.jpg'); /* Path to your image */
+    background-size: cover; /* Ensures the image covers the entire container */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    height: 100vh; /* Full viewport height */
+    width: 100vw; /* Full viewport width */
+  }
+  
+/* Dark Space-like Gradient with Stars */
+/* Simple Dark Space-like Background */
+.space-background {
+  background-color: #0a1a2b; /* A deep dark blue, mimicking the feel of space */
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Glow Effect for Text */
+.glow-text {
+  color: #ffffff;
+  font-size: 4rem;
+  text-align: center;
+  z-index: 1;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 255, 255, 0.5);
+  animation: textFloat 5s infinite alternate ease-in-out;
+}
+
+/* Button with Simple Glow */
+.glow-button {
+  background-color: #ff8c00;
+  border: none;
+  padding: 15px 30px;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(255, 140, 0, 0.8), 0 0 20px rgba(255, 140, 0, 0.6);
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+  transition: box-shadow 0.3s ease-in-out;
+  z-index: 1;
+  margin-top: 20px;
+}
+
+/* Optional floating effect for text */
+@keyframes textFloat {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-10px); }
+}
+
+

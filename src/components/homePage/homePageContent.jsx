@@ -80,8 +80,9 @@ function HomePageContent() {
       {/* First Content Div */}
       <div
         ref={contentRef1}
-        className="bg-primary-orange text-background-cream w-[28rem] rounded-lg px-6 py-4 absolute top-[100vh] left-[8vw] text-[1.5rem] z-10 transition-opacity duration-500"
+        className="bg-primary-orange text-background-black w-[28rem] rounded-lg px-6 py-4 absolute top-[100vh] left-[8vw] text-[1.5rem] z-10 transition-opacity duration-500"
         style={{
+          backgroundColor:'#4dbd31',
           opacity: visible1 ? 1 : 0, // Fade in when visible
         }}
       >
@@ -104,8 +105,9 @@ function HomePageContent() {
       {/* Second Content Div */}
       <div
         ref={contentRef2}
-        className="bg-primary-orange text-background-cream w-[28rem] rounded-lg px-6 py-4 absolute top-[175vh] left-[70vw] text-[1.5rem] font-bold  z-10 transition-opacity duration-500"
+        className="bg-primary-orange text-background-black w-[28rem] rounded-lg px-6 py-4 absolute top-[175vh] left-[70vw] text-[1.5rem] font-bold  z-10 transition-opacity duration-500"
         style={{
+          backgroundColor:'#4dbd31',
           opacity: visible2 ? 1 : 0, // Fade in when visible
         }}
       >
@@ -123,8 +125,9 @@ function HomePageContent() {
       </div>
       <div
         ref={contentRef3}
-        className="bg-primary-orange text-background-cream font-bold w-[28rem] rounded-lg px-6 py-4 absolute top-[225vh] left-[8vw] text-[1.5rem] z-10 transition-opacity duration-500"
+        className="bg-primary-orange text-background-black font-bold w-[28rem] rounded-lg px-6 py-4 absolute top-[225vh] left-[8vw] text-[1.5rem] z-10 transition-opacity duration-500"
         style={{
+          backgroundColor:'#4dbd31',
           opacity: visible3 ? 1 : 0, // Fade in when visible
         }}
       >
@@ -144,6 +147,7 @@ function HomePageContent() {
         className="absolute h-[8rem] rounded-full w-[8rem] font-bold cursor-pointer outline-none bg-primary-orange text-background-cream top-[280vh] left-[85vw] text-[1.5rem] z-10 transition-opacity duration-500 flex items-center justify-center"
         ref={NextBtn}
         style={{
+          backgroundColor:'#4dbd31',
           opacity: visible4 ? 1 : 0, // Fade in when visible
         }}
         animate={

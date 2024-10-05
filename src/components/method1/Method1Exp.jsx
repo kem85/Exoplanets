@@ -37,7 +37,11 @@ function Explain(){
   </p>
 
   <div className="buttons">
-    <button className="learn-more">Learn More About Exoplanets</button>
+  <Link to="/quiz">
+        <button className="learn-more gloww-button">Learn More About Exoplanets</button>
+      </Link>
+
+
     <button className="explore-methods button">Explore Detection Methods</button>
   </div>
 </div>
